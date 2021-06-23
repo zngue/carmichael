@@ -29,6 +29,7 @@ func Notify(ctx *gin.Context) {
 	err := pkg.MysqlConn.Model(&model.ZngOrder{}).Where("order_num = ?", rep.MchIdNo).Updates(map[string]interface{}{
 		"pay_status":  1,
 		"update_time": time.Now().Unix(),
+		"openid":      rep.Openid,
 	}).Error
 
 	if err != nil {
