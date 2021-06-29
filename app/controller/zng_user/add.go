@@ -17,15 +17,18 @@ func Add(ctx *gin.Context) {
 		response.HttpParameterError(ctx, err)
 		return
 	}
-	req.Data = &data
 	userService := service.NewZngUserService()
 	req.Openid = data.Openid
 	detail, err2 := userService.Detail(&req)
+
 	if err2 != nil && err2 != gorm.ErrRecordNotFound { //有错误但是不是查询数据不存在
 		response.HttpParameterError(ctx, err2)
 		return
 	}
-	if detail != nil {
+	req.Data = &model.ZngUser{}
+	req.Data = &data
+	num := req.GetDB().RowsAffected
+	if num > 0 {
 		response.HttpOkWithMessage(ctx, "用户已存在", detail)
 		return
 	}

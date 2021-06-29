@@ -11,7 +11,7 @@ require (
 	github.com/spf13/cast v1.3.1
 	github.com/spf13/viper v1.7.1
 	github.com/xinliangnote/go-util v0.0.0-20200323134426-527984dc34bf
-	github.com/zngue/go_helper v0.0.0-20210602011314-f4f0160c3d63
+	github.com/zngue/go_helper v0.0.0-20210623105635-1ba47c5bbf75
 	golang.org/x/sync v0.0.0-20201020160332-67f06af15bc9
 	gopkg.in/yaml.v2 v2.4.0
 	gorm.io/driver/mysql v1.0.5 // indirect
