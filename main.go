@@ -4,6 +4,8 @@ import (
 	"context"
 	"log"
 
+	"github.com/zngue/carmichael/app/model"
+
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 	"github.com/zngue/carmichael/app/router"
@@ -24,7 +26,7 @@ func main() {
 	}
 	if mysql != nil {
 		//auto.Auto(mysql)
-		//mysql.AutoMigrate(new(model.ZngUser))
+		mysql.AutoMigrate(new(model.ZngUser), new(model.ZngKm))
 	}
 	port := viper.GetString("AppPort")
 	run, errs := pkg.GinRun(port, func(engine *gin.Engine) {

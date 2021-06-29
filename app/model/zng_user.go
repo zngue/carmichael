@@ -16,6 +16,7 @@ type ZngUser struct {
 	Openid      string         `gorm:"column:openid;" form:"openid" json:"openid"  binding:"required"`             //昵称
 	HeadImgUrl  string         `gorm:"column:headimgurl;" form:"headimgurl" json:"headimgurl"  binding:"required"` //头像
 	ExpireTime  int64          `gorm:"column:expire_time;" form:"expire_time" json:"expire_time"  `                //到期时间
+	RecommendID int64          `gorm:"column:recommend_id;" form:"recommend_id" json:"recommend_id"  `             //推荐者id
 	Account     string         `gorm:"column:account;" form:"account" json:"account" `                             //账号
 	ExtAccount  string         `gorm:"column:ext_account;" form:"ext_account" json:"ext_account" `                 //备用账号
 	Password    string         `gorm:"column:password;" form:"password" json:"password" `                          //密码

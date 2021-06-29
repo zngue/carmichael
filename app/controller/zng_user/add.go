@@ -26,7 +26,7 @@ func Add(ctx *gin.Context) {
 		return
 	}
 	if detail != nil {
-		response.HttpFailWithMessage(ctx, "用户已存在")
+		response.HttpOkWithMessage(ctx, "用户已存在", detail)
 		return
 	}
 	err := userService.Add(&req)
@@ -34,6 +34,6 @@ func Add(ctx *gin.Context) {
 		response.HttpFailWithMessage(ctx, err.Error())
 		return
 	}
-	response.HttpSuccessWithError(ctx, err, nil)
+	response.HttpSuccessWithError(ctx, err, data)
 	return
 }
