@@ -75,7 +75,7 @@ func Notify(ctx *gin.Context) {
 		}).Error
 
 	})
-	if shopOne.CateId == 1 { // idea 账号密码不更新数据库
+	if kmOne.KmType == 2 { // idea 账号密码不更新数据库
 		wg.Go(func() error {
 			return begin.Model(&model.ZngUser{}).Where("openid = ?", rep.Openid).Updates(map[string]interface{}{
 				"account":      kmOne.Account,
