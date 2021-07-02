@@ -18,7 +18,7 @@ type ZngKm struct {
 	ExtAccount  string         `gorm:"column:ext_account;" form:"ext_account" json:"ext_account" `    //备用账号
 	ExtPassword string         `gorm:"column:ext_password;" form:"ext_password" json:"ext_password" ` //备用密码
 	Status      int32          `gorm:"column:status;" form:"status" json:"status"`                    //  0未使用  1已使用 2 作废
-	KmType      int32          `gorm:"column:km_type;" form:"km_type" json:"km_type"`                 //  卡密类型 是否更新 2 不需要
+	KmType      int32          `gorm:"column:km_type;" form:"km_type" json:"km_type"`                 //  卡密类型  是否更新 2 不需要
 	ExpireTime  int64          `gorm:"column:expire_time;" form:"expire_time" json:"expire_time"  `   //有效期
 }
 

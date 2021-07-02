@@ -26,6 +26,7 @@ func main() {
 	}
 	if mysql != nil {
 		//auto.Auto(mysql)
+
 		mysql.AutoMigrate(new(model.ZngUser), new(model.ZngKm))
 	}
 	port := viper.GetString("AppPort")
