@@ -3,6 +3,8 @@ package zng_order
 import (
 	"time"
 
+	"github.com/zngue/carmichael/app/httplib"
+
 	"github.com/zngue/carmichael/app/request"
 	"github.com/zngue/carmichael/app/service"
 
@@ -19,6 +21,16 @@ type Response struct {
 	TradeState     string `json:"trade_state"`
 	TradeStateDesc string `json:"trade_state_desc"`
 	SuccessTime    string `json:"success_time"`
+}
+
+func sendTemplate(maps map[string]string) {
+	httpRequest := httplib.Get("http://127.0.0.1:6060/pay/message/send")
+	if maps != nil {
+		for key, val := range maps {
+			httpRequest.Param(key, val)
+		}
+	}
+	httpRequest.Response()
 }
 
 func Notify(ctx *gin.Context) {
@@ -98,7 +110,6 @@ func Notify(ctx *gin.Context) {
 				"Status": 1,
 			}).Error
 		})
-
 	}
 	err = wg.Wait()
 	if err != nil {
@@ -117,6 +128,11 @@ func Notify(ctx *gin.Context) {
 		return
 	}
 
+	sendTemplate(map[string]string{
+		"account":  kmOne.Account,
+		"password": kmOne.Password,
+		"openid":   rep.Openid,
+	})
 	ctx.JSON(200, gin.H{
 		"code":    200,
 		"message": "支付成功",
