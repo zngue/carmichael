@@ -8,4 +8,5 @@ func Router(group *gin.RouterGroup) {
 	ZngShopRouter(group)
 	ZngShopCarmichaelRouter(group)
 	ZngUserRouter(group)
+	ZngKmRouter(group)
 }

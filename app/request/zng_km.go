@@ -7,9 +7,7 @@ import (
 
 type ZngKmRequest struct {
 	pkg.CommonRequest
-	ID     int    `form:"id" field:"id" where:"eq" default:"0"`
-	ShopID int    `form:"shop_id" field:"openid" where:"eq" default:""`
-	Status string `form:"status" field:"status" where:"eq" default:"-1"`
+	ID int `form:"id" field:"id" where:"eq" default:"0"`
 }
 
 func (r *ZngKmRequest) Common(db *gorm.DB) *gorm.DB {
