@@ -19,5 +19,6 @@ func ZngOrderRouter(group *gin.RouterGroup) {
 		ZngOrderGroup.POST("delete", zng_order.Delete)
 		ZngOrderGroup.POST("add", zng_order.Add)
 		ZngOrderGroup.POST("notify", zng_order.Notify)
+		ZngOrderGroup.POST("sales", zng_order.Sales)
 	}
 }

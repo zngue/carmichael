@@ -26,7 +26,7 @@ func main() {
 	}
 	if mysql != nil {
 		//auto.Auto(mysql)
-		mysql.AutoMigrate(new(model.ZngUser), new(model.ZngKm))
+		mysql.AutoMigrate(new(model.ZngUser), new(model.ZngKm), new(model.ZngOrder))
 	}
 	port := viper.GetString("AppPort")
 	run, errs := pkg.GinRun(port, func(engine *gin.Engine) {
