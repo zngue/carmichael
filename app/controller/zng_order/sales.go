@@ -38,7 +38,7 @@ func Sales(ctx *gin.Context) {
 	defer begin.Rollback()
 	shopwg.Go(func() error {
 		return begin.Model(&model.ZngOrder{}).Where("order_num = ?", req.OrderNum).Updates(map[string]interface{}{
-			"is_sell_after": 2,
+			"is_sell_after": 1,
 		}).Error
 	})
 	shopwg.Go(func() error {
