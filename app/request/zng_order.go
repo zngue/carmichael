@@ -14,10 +14,12 @@ type ZngOrderRequest struct {
 }
 
 func (r *ZngOrderRequest) Common(db *gorm.DB) *gorm.DB {
-	r.OrderMap = map[string]interface{}{
-		"1": "id desc",
+	if r.Actions == 2 {
+		r.OrderMap = map[string]interface{}{
+			"1": "id desc",
+		}
+		r.OrderString = "1"
 	}
-	r.OrderString = "1"
 	tx := r.Init(db, *r)
 	return tx
 }
