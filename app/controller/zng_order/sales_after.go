@@ -12,11 +12,23 @@ import (
 	"github.com/zngue/go_helper/pkg"
 )
 
+func InArrayString(arr []string, s string) bool {
+
+	if len(arr) == 0 {
+		return false
+	}
+	for _, val := range arr {
+		if val == s {
+			return true
+		}
+	}
+	return false
+
+}
 func SaleAfter(ctx *gin.Context) {
 
 	var list []model.ZngOrder
-
-	err := pkg.MysqlConn.Model(&model.ZngOrder{}).Where("openid !=  ''").Where("pay_status = ?", 1).Group("openid").Find(&list).Error
+	err := pkg.MysqlConn.Model(&model.ZngOrder{}).Where("openid !=  ''").Where("pay_status = ?", 1).Order("id desc").Find(&list).Error
 	fmt.Println(err)
 	Begin := pkg.MysqlConn.Begin()
 	defer Begin.Rollback()
@@ -24,6 +36,9 @@ func SaleAfter(ctx *gin.Context) {
 	nowTime := time.Now().Unix()
 	for _, order := range list {
 		var one model.ZngKm
+		if InArrayString(openidArr, order.OpenID) {
+			continue
+		}
 		err := pkg.MysqlConn.Model(&model.ZngKm{}).Where("shop_id = ?", order.ShopId).Find(&one).Error
 		fmt.Println(err)
 
@@ -41,18 +56,14 @@ func SaleAfter(ctx *gin.Context) {
 				}
 				Begin.Model(&model.ZngUser{}).Where(" openid = ? ", order.OpenID).Updates(updateUser)
 				openidArr = append(openidArr, order.OpenID)
-				fmt.Println("opneid,update", updateUser)
-
 			}
 		}
-
 	}
+	fmt.Println(strings.Join(openidArr, ","))
 	Begin.Commit()
-
 	SalesSendTemplate(map[string]string{
 		"openid": strings.Join(openidArr, ","),
 	})
-
 }
 func SalesSendTemplate(maps map[string]string) {
 	httpRequest := httplib.Get("http://127.0.0.1:6060/pay/message/salesAfter")
