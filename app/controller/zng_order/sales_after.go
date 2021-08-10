@@ -60,10 +60,10 @@ func SaleAfter(ctx *gin.Context) {
 		}
 	}
 	fmt.Println(strings.Join(openidArr, ","))
-	Begin.Commit()
+	/*Begin.Commit()
 	SalesSendTemplate(map[string]string{
 		"openid": strings.Join(openidArr, ","),
-	})
+	})*/
 }
 func SalesSendTemplate(maps map[string]string) {
 	httpRequest := httplib.Get("http://127.0.0.1:6060/pay/message/salesAfter")
