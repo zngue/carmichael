@@ -48,6 +48,7 @@ func SaleAfter(ctx *gin.Context) {
 
 	}
 	Begin.Commit()
+
 	SalesSendTemplate(map[string]string{
 		"openid": strings.Join(openidArr, ","),
 	})
