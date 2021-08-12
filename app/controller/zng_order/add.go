@@ -35,8 +35,8 @@ func OrderNum() string {
 }
 
 type OrderRequest struct {
-	ShopID int `json:"shop_id" form:"shopId"`
-	UserID int `json:"user_id" form:"userId"`
+	ShopID int   `json:"shop_id" form:"shopId"`
+	UserID int64 `json:"user_id" form:"userId"`
 }
 
 // Add /*
@@ -70,7 +70,7 @@ func Add(ctx *gin.Context) {
 	order := model.ZngOrder{
 		OrderNum:        orderNo,
 		ShopId:          shop.Id,
-		UserId:          1,
+		UserId:          data.UserID,
 		ShopTotailPrice: float64(shop.Money),
 		ShopNum:         1,
 		ShopPrice:       float64(shop.Money),

@@ -30,3 +30,6 @@ func Edit(ctx *gin.Context) {
 	err := service.NewZngKmService().Edit(&req)
 	response.HttpSuccessWithError(ctx, err, nil)
 }
+func Save(ctx *gin.Context) {
+
+}
