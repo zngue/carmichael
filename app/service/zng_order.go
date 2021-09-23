@@ -15,7 +15,7 @@ type ZngOrderServiceInterface interface {
 	Delete(req *request.ZngOrderRequest) (err error)
 	Add(req *request.ZngOrderRequest) (err error)
 	Edit(req *request.ZngOrderRequest) (err error)
-	Count(openid string) (int64, error)
+	Count(openid string, shopId int64) (int64, error)
 }
 
 /*
@@ -88,9 +88,9 @@ func (r *ZngOrderService) Delete(req *request.ZngOrderRequest) (err error) {
 	err = r.InitModelDB(req).Error
 	return err
 }
-func (r *ZngOrderService) Count(openid string) (int64, error) {
+func (r *ZngOrderService) Count(openid string, shopId int64) (int64, error) {
 	var num int64
-	err := pkg.MysqlConn.Model(&model.ZngOrder{}).Where("pay_status = ?", 1).Where("openid = ?", openid).Count(&num).Error
+	err := pkg.MysqlConn.Model(&model.ZngOrder{}).Where("shop_id = ?", shopId).Where("pay_status = ?", 1).Where("openid = ?", openid).Count(&num).Error
 	return num, err
 }
 
