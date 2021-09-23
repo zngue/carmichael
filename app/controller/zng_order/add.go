@@ -2,6 +2,7 @@ package zng_order
 
 import (
 	"encoding/json"
+	"fmt"
 	"math/rand"
 	"time"
 
@@ -35,8 +36,9 @@ func OrderNum() string {
 }
 
 type OrderRequest struct {
-	ShopID int   `json:"shop_id" form:"shopId"`
-	UserID int64 `json:"user_id" form:"userId"`
+	ShopID int    `json:"shop_id" form:"shopId"`
+	UserID int64  `json:"user_id" form:"userId"`
+	OpenID string `form:"openid"`
 }
 
 // Add /*
@@ -58,13 +60,26 @@ func Add(ctx *gin.Context) {
 		response.HttpParameterError(ctx, err)
 		return
 	}
+
 	shopRequest := request.ZngShopRequest{
 		ID: data.ShopID,
 	}
+
 	shop, err3 := service.NewZngShopService().Detail(&shopRequest)
 	if err3 != nil {
 		response.HttpFailWithMessage(ctx, err3.Error())
 		return
+	}
+	if shop.UserLimit > 0 && data.OpenID != "oPv356jetWWZPjVY31e7Eiuy3kZQ" {
+		countNum, err := service.NewZngOrderService().Count(data.OpenID)
+		if err != nil {
+			response.HttpFailWithMessage(ctx, err.Error())
+			return
+		}
+		if countNum >= shop.UserLimit {
+			response.HttpFailWithMessage(ctx, fmt.Sprintf("体验卡限购%d次", shop.UserLimit))
+			return
+		}
 	}
 	var orderNo = OrderNum()
 	order := model.ZngOrder{
@@ -110,6 +125,7 @@ func Add(ctx *gin.Context) {
 		response.HttpFailWithMessage(ctx, err.Error())
 		return
 	}
+
 	req.Data = &order
 	err := service.NewZngOrderService().Add(&req)
 	if err == nil && (OrderRes.Code == 200 || OrderRes.Code == 203) {
