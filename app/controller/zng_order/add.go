@@ -77,7 +77,7 @@ func Add(ctx *gin.Context) {
 			return
 		}
 		if countNum >= shop.UserLimit {
-			response.HttpFailWithMessage(ctx, fmt.Sprintf("体验卡限购%d次", shop.UserLimit))
+			response.HttpFailWithMessage(ctx, fmt.Sprintf(shop.Title+"限购%d件", shop.UserLimit))
 			return
 		}
 	}
