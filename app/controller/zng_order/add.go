@@ -71,7 +71,7 @@ func Add(ctx *gin.Context) {
 		return
 	}
 	if shop.UserLimit > 0 && data.OpenID != "" && data.OpenID != "oPv356jetWWZPjVY31e7Eiuy3kZQ" {
-		countNum, err := service.NewZngOrderService().Count(data.OpenID)
+		countNum, err := service.NewZngOrderService().Count(data.OpenID, shop.Id)
 		if err != nil {
 			response.HttpFailWithMessage(ctx, err.Error())
 			return
@@ -86,6 +86,7 @@ func Add(ctx *gin.Context) {
 		OrderNum:        orderNo,
 		ShopId:          shop.Id,
 		UserId:          data.UserID,
+		OpenID:          data.OpenID,
 		ShopTotailPrice: float64(shop.Money),
 		ShopNum:         1,
 		ShopPrice:       float64(shop.Money),
