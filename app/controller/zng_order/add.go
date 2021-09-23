@@ -70,7 +70,7 @@ func Add(ctx *gin.Context) {
 		response.HttpFailWithMessage(ctx, err3.Error())
 		return
 	}
-	if shop.UserLimit > 0 && data.OpenID != "oPv356jetWWZPjVY31e7Eiuy3kZQ" {
+	if shop.UserLimit > 0 && data.OpenID != "" && data.OpenID != "oPv356jetWWZPjVY31e7Eiuy3kZQ" {
 		countNum, err := service.NewZngOrderService().Count(data.OpenID)
 		if err != nil {
 			response.HttpFailWithMessage(ctx, err.Error())
