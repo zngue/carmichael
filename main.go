@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"github.com/zngue/go_helper/pkg/response"
 	"log"
 
 	"github.com/zngue/carmichael/app/model"
@@ -30,6 +31,9 @@ func main() {
 	}
 	port := viper.GetString("AppPort")
 	run, errs := pkg.GinRun(port, func(engine *gin.Engine) {
+		engine.NoRoute(func(c *gin.Context) {
+			response.HttpFailWithCodeAndMessage(404,"路由不存在",c)
+		})
 		group := engine.Group("carmichael")
 		router.Router(group)
 	})

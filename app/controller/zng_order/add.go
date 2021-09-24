@@ -2,6 +2,7 @@ package zng_order
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"math/rand"
 	"time"
@@ -60,7 +61,10 @@ func Add(ctx *gin.Context) {
 		response.HttpParameterError(ctx, err)
 		return
 	}
-
+	if data.ShopID==0 {
+		response.HttpParameterError(ctx, errors.New("无效参数"))
+		return
+	}
 	shopRequest := request.ZngShopRequest{
 		ID: data.ShopID,
 	}
