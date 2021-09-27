@@ -94,6 +94,7 @@ func Notify(ctx *gin.Context) {
 				"password":     kmOne.Password,
 				"ext_account":  kmOne.ExtAccount,
 				"ext_password": kmOne.ExtPassword,
+				"code_content": kmOne.CodeContent,
 				"expire_time":  time.Now().Unix() + kmOne.ExpireTime,
 			}).Error
 		})

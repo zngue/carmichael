@@ -21,6 +21,7 @@ type ZngUser struct {
 	ExtAccount  string         `gorm:"column:ext_account;" form:"ext_account" json:"ext_account" `                 //备用账号
 	Password    string         `gorm:"column:password;" form:"password" json:"password" `                          //密码
 	ExtPassword string         `gorm:"column:ext_password;" form:"ext_password" json:"ext_password" `              //备用密码
+	CodeContent string         `gorm:"column:code_content;" form:"code_content" json:"code_content" `              //高端激活码
 	Status      int32          `gorm:"column:status;" form:"status" json:"status"`                                 //  2禁用 1正常
 }
 
