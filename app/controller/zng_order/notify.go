@@ -89,7 +89,7 @@ func Notify(ctx *gin.Context) {
 	})
 	wg.Go(func() error {
 		return begin.Model(&model.ZngShop{}).Where("id = ?", detail.ShopId).Updates(map[string]interface{}{
-			"sales_num": detail.ShopNum + 1,
+			"sales_num": shopOne.SalesNum + 1,
 		}).Error
 	})
 	if kmOne.KmType == 2 { // idea 账号密码不更新数据库
