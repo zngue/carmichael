@@ -1,0 +1,9 @@
+micro:
+    isMicro: false #是否启动微服务
+    redisDB: 11 #微服务里redis 数据库
+    isLocal: false #是否使用本地数据
+    serviceList:
+        registerCenter: http://127.0.0.1:6006 #注册中心
+        goShopCarmichael: http://127.0.0.1:6061 #卡密系统
+
+

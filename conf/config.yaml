@@ -1,8 +1,11 @@
 AppMode: debug               # 开发模式, debug, release, test
-AppPort: 6061                  # HTTP绑定端口
 AppReadTimeout: 120
 AppWriteTimeout : 120
-AppName:  卡密              # API Server的名字
+
+AppPort: 6061                  # HTTP绑定端口
+AppTitle: 商户卡密系统
+AppHost: 127.0.0.1
+AppName: goShopCarmichael
 url: http://127.0.0.1:7001   # pingServer函数请求的API服务器的ip:port
 ErrReport : false
 SystemId : 1

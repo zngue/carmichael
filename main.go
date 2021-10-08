@@ -1,22 +1,17 @@
 package main
 
 import (
-	"context"
-	"github.com/zngue/go_helper/pkg/response"
-	"log"
-
-	"github.com/zngue/carmichael/app/model"
-
 	"github.com/gin-gonic/gin"
-	"github.com/spf13/viper"
+	"github.com/zngue/carmichael/app/model"
 	"github.com/zngue/carmichael/app/router"
-	"github.com/zngue/go_helper/pkg"
-	"github.com/zngue/go_helper/pkg/sign_chan"
+	"github.com/zngue/go_helper/pkg/common_run"
+	"github.com/zngue/go_helper/pkg/response"
+	"gorm.io/gorm"
 )
 
 func main() {
-
-	if conErr := pkg.NewConfig(); conErr != nil {
+	run()
+	/*if conErr := pkg.NewConfig(); conErr != nil {
 		log.Fatal(conErr)
 		return
 	}
@@ -50,6 +45,23 @@ func main() {
 	sign_chan.SignChalNotify()
 	sign_chan.ListClose(func(ctx context.Context) error {
 		return run.Shutdown(ctx)
-	})
+	})*/
+
+}
+
+func run() {
+	common_run.CommonGinRun(
+		common_run.FnRouter(func(engine *gin.Engine) {
+			engine.NoRoute(func(c *gin.Context) {
+				response.HttpFailWithCodeAndMessage(404, "路由不存在", c)
+			})
+			groups := engine.Group("carmichael")
+			router.Router(groups)
+		}),
+		common_run.IsRegisterCenter(true),
+		common_run.MysqlConn(func(db *gorm.DB) {
+			db.AutoMigrate(new(model.ZngUser), new(model.ZngKm), new(model.ZngOrder))
+		}),
+	)
 
 }
