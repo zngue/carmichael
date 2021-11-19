@@ -7,7 +7,7 @@ import (
 
 type ZngUserRequest struct {
 	pkg.CommonRequest
-	ID     int    `form:"id" field:"id" where:"eq" default:"0"`
+	ID     int64  `form:"id" field:"id" where:"eq" default:"0"`
 	Openid string `form:"openid" field:"openid" where:"eq" default:""`
 }
 

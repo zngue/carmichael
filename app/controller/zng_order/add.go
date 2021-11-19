@@ -37,9 +37,13 @@ func OrderNum() string {
 }
 
 type OrderRequest struct {
-	ShopID int    `json:"shop_id" form:"shopId"`
-	UserID int64  `json:"user_id" form:"userId"`
-	OpenID string `form:"openid"`
+	ShopID   int    `json:"shop_id" form:"shopId"`
+	UserID   int64  `json:"user_id" form:"userId"`
+	OpenID   string `form:"openid"`
+	Username string `form:"username"`
+	Telphone string `form:"telphone"`
+	Address  string `form:"address"`
+	Desc     string `form:"desc"`
 }
 
 // Add /*
@@ -61,7 +65,7 @@ func Add(ctx *gin.Context) {
 		response.HttpParameterError(ctx, err)
 		return
 	}
-	if data.ShopID==0 {
+	if data.ShopID == 0 {
 		response.HttpParameterError(ctx, errors.New("无效参数"))
 		return
 	}
@@ -98,6 +102,10 @@ func Add(ctx *gin.Context) {
 		OrderStatus:     1,
 		PayStatus:       0,
 		ShopTitle:       shop.Title,
+		UserName:        data.Username,
+		Telphone:        data.Telphone,
+		Address:         data.Address,
+		Desc:            data.Desc,
 	}
 	appid := viper.GetString("payment.appid")
 	appkey := viper.GetString("payment.appkey")

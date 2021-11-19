@@ -25,6 +25,10 @@ type ZngOrder struct {
 	UpdatedAt       time.Time      `gorm:"column:updated_at;" form:"updatedAt" json:"updatedAt"  binding:"required"`
 	DeletedAt       gorm.DeletedAt `gorm:"column:deleted_at;" form:"deletedAt" json:"deletedAt"  binding:"required"`
 	CreatedAt       time.Time      `gorm:"column:created_at;" form:"createdAt" json:"createdAt"  binding:"required"`
+	UserName        string         `gorm:"column:username;" form:"username" json:"username"  `
+	Telphone        string         `gorm:"column:telphone;" form:"telphone" json:"telphone"`
+	Address         string         `gorm:"column:address;" form:"address" json:"address"  `
+	Desc            string         `gorm:"column:desc;" form:"desc" json:"desc" `
 }
 
 func (m *ZngOrder) TableName() string {

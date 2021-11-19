@@ -12,6 +12,7 @@ type ZngUser struct {
 	CreatedAt   time.Time      `gorm:"column:created_at;" form:"createdAt" json:"createdAt" `
 	UpdatedAt   time.Time      `gorm:"column:updated_at;" form:"updatedAt" json:"updatedAt"  `
 	Name        string         `gorm:"column:name;" form:"name" json:"name" `                                      //名称
+	Unionid     string         `gorm:"column:unionid;" form:"unionid" json:"unionid" `                             //公众号unionid
 	NickName    string         `gorm:"column:nickname;" form:"nickname" json:"nickname"  binding:"required"`       //昵称
 	Openid      string         `gorm:"column:openid;" form:"openid" json:"openid"  binding:"required"`             //昵称
 	HeadImgUrl  string         `gorm:"column:headimgurl;" form:"headimgurl" json:"headimgurl"  binding:"required"` //头像
