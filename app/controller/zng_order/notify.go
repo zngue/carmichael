@@ -142,7 +142,6 @@ func Notify(ctx *gin.Context) {
 		})
 		return
 	}
-
 	sendTemplate(map[string]string{
 		"account":  kmOne.Account,
 		"password": kmOne.Password,
