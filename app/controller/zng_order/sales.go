@@ -63,3 +63,8 @@ func Sales(ctx *gin.Context) {
 	return
 
 }
+
+// SalesMsg 售后消息提醒续费
+func SalesMsg(ctx *gin.Context) {
+
+}
