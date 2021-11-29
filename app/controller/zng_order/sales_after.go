@@ -5,6 +5,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/spf13/viper"
+
 	"github.com/zngue/carmichael/app/httplib"
 
 	"github.com/gin-gonic/gin"
@@ -25,6 +27,7 @@ func InArrayString(arr []string, s string) bool {
 	return false
 
 }
+
 func SaleAfter(ctx *gin.Context) {
 
 	var list []model.ZngOrder
@@ -67,7 +70,12 @@ func SaleAfter(ctx *gin.Context) {
 
 }
 func SalesSendTemplate(maps map[string]string) {
-	httpRequest := httplib.Get("http://127.0.0.1:6060/pay/message/salesAfter")
+	afterMessageUrl := viper.GetString("payment.afterMessageUrl")
+	if len(afterMessageUrl) == 0 {
+		fmt.Println("afterMessageUrl null")
+		return
+	}
+	httpRequest := httplib.Get(afterMessageUrl)
 	if maps != nil {
 		for key, val := range maps {
 			httpRequest.Param(key, val)

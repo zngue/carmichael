@@ -5,3 +5,5 @@ payment:
   return_url: https://pay.zngue.com/weixin/user/order
   createUrl: https://pay.zngue.com/payment/createOrder
   paymentUrl: https://pay.zngue.com/weixin/pay
+  sendMessageUrl: http://127.0.0.1:6060/pay/message/send
+  afterMessageUrl: http://127.0.0.1:6060/pay/message/salesAfter

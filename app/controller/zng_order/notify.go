@@ -1,7 +1,10 @@
 package zng_order
 
 import (
+	"fmt"
 	"time"
+
+	"github.com/spf13/viper"
 
 	"github.com/zngue/carmichael/app/httplib"
 
@@ -24,7 +27,13 @@ type Response struct {
 }
 
 func sendTemplate(maps map[string]string) {
-	httpRequest := httplib.Get("http://127.0.0.1:6060/pay/message/send")
+
+	sendMessageUrl := viper.GetString("payment.sendMessageUrl")
+	if len(sendMessageUrl) == 0 {
+		fmt.Println("sendMessageUrl null")
+		return
+	}
+	httpRequest := httplib.Get(sendMessageUrl)
 	if maps != nil {
 		for key, val := range maps {
 			httpRequest.Param(key, val)
