@@ -43,6 +43,7 @@ func SalesOrder(ctx *gin.Context) {
 			updateUser["ext_account"] = one.ExtAccount
 			updateUser["password"] = one.Password
 			updateUser["ext_password"] = one.ExtPassword
+			updateUser["code_content"] = one.CodeContent
 			if user.ExpireTime == 0 || user.ExpireTime != order.AddTime+one.ExpireTime {
 				updateUser["expire_time"] = order.AddTime + one.ExpireTime
 			}
