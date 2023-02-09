@@ -14,7 +14,7 @@ import (
 	"github.com/zngue/go_helper/pkg/response"
 )
 
-//售后处理
+// 售后处理
 func Sales(ctx *gin.Context) {
 	var req request.ZngOrderRequest
 	if err := ctx.ShouldBind(&req); err != nil {
@@ -47,6 +47,7 @@ func Sales(ctx *gin.Context) {
 			"password":     kmOne.Password,
 			"ext_account":  kmOne.ExtAccount,
 			"ext_password": kmOne.ExtPassword,
+			"code_content": kmOne.CodeContent,
 		}).Error
 	})
 	shoerr := shopwg.Wait()
